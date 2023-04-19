@@ -1,6 +1,8 @@
 import React from 'react';
-import {Button} from '@react-native-material/core';
+import LoginScreen from './src/Screens/LoginScreen';
 
-const App = () => <Button title="Click Me" onPress={() => alert('🎉🎉🎉')} />;
+const App = () => {
+  return <LoginScreen />;
+};
 
 export default App;
