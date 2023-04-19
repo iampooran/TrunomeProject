@@ -5,6 +5,9 @@ import {WelcomeScreen, facebookLogo, googleLogo} from '../assets/images';
 import {Text} from '@react-native-material/core';
 import {Box} from '@react-native-material/core';
 import {Button} from '@react-native-material/core';
+import {buttonTitle} from '../utils/constents/buttonTitle';
+import {placeholder} from '../utils/constents/placeholder';
+import {colors} from '../utils/constents/colors';
 
 const LoginScreen = () => {
   return (
@@ -18,27 +21,30 @@ const LoginScreen = () => {
         <Box style={styles.phoneNumberBox2}>
           <Text style={styles.phoneNumber}>Phone Number</Text>
           <TextInput
-            placeholderTextColor="#9D9D9D"
-            placeholder="Please enter your phone number"
+            placeholderTextColor={colors.placeholderColorPhoneNumber}
+            placeholder={placeholder.phoneNumberInput}
             style={styles.phoneNumberInput}
           />
         </Box>
       </Box>
       <Box style={styles.buttonBox}>
         <Box style={styles.buttonBox2}>
-          <Button title="Send OTP" style={styles.welcomeScreenButton} />
+          <Button
+            title={buttonTitle.sendOTP}
+            style={styles.welcomeScreenButton}
+          />
           <Box style={styles.singInTextBox}>
             <View style={styles.HRLine} />
             <Text style={styles.signInText}>Or Sign in with</Text>
             <View style={styles.HRLine} />
           </Box>
           <Button
-            title="Sign in with Google"
+            title={buttonTitle.googleLogin}
             style={styles.welcomeScreenButton}
             leading={<Image source={googleLogo} style={styles.loginLogo} />}
           />
           <Button
-            title="Sign in with Facebook"
+            title={buttonTitle.facebookLogin}
             style={styles.welcomeScreenButton}
             leading={<Image source={facebookLogo} style={styles.loginLogo} />}
           />

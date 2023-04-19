@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors} from '../utils/constents/colors';
 
 export const styles = StyleSheet.create({
   homeContainer: {
@@ -10,13 +11,13 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   welcomeText: {
-    color: 'white',
+    color: colors.white,
     fontWeight: 700,
     fontSize: 32,
     lineHeight: 39,
   },
   loginText: {
-    color: 'white',
+    color: colors.white,
     fontWeight: 500,
     fontSize: 15,
     lineHeight: 18,
@@ -26,8 +27,6 @@ export const styles = StyleSheet.create({
     left: '10%',
   },
   phoneNumberBox: {
-    // width: '85%',
-    // left: '5%',
     top: '39%',
     alignItems: 'center',
   },
@@ -44,21 +43,19 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     paddingLeft: 20,
-    borderColor: '#1CA7B1',
+    borderColor: colors.phoneNumberInputBorder,
   },
   buttonBox: {
-    // width: '90%',
     top: '42%',
     fontWeight: 700,
   },
   welcomeScreenButton: {
     borderRadius: 8,
-    // padding: 48,
     fontWeight: 700,
     paddingTop: 3,
     marginBottom: 15,
     height: 45,
-    backgroundColor: '#1CA7B1',
+    backgroundColor: colors.welcomeScreenButtonBackground,
     boxShadow: '0px 6px 16px rgba(0, 0, 0, 0.25)',
     width: '90%',
   },
@@ -72,7 +69,7 @@ export const styles = StyleSheet.create({
   },
   signInText: {
     fontWeight: 500,
-    color: '#9D9D9D',
+    color: colors.signInText,
     fontSize: 14,
   },
   singInTextBox: {
@@ -85,7 +82,7 @@ export const styles = StyleSheet.create({
   HRLine: {
     flex: 1,
     height: 0.5,
-    backgroundColor: '#9D9D9D',
+    backgroundColor: colors.HRLine,
     marginLeft: 10,
     marginRight: 10,
   },
