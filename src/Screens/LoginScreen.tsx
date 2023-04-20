@@ -1,5 +1,5 @@
 import {View, Image, TextInput} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {styles} from './style';
 import {WelcomeScreen, facebookLogo, googleLogo} from '../assets/images';
 import {Text} from '@react-native-material/core';
@@ -8,11 +8,34 @@ import {Button} from '@react-native-material/core';
 import {buttonTitle} from '../utils/constents/buttonTitle';
 import {placeholder} from '../utils/constents/placeholder';
 import {colors} from '../utils/constents/colors';
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 
 const LoginScreen = ({navigation}) => {
-  const handleLogin = () => {
-    navigation.navigate('Authenticated');
+  const handleLogin = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      await GoogleSignin.signOut();
+      const userInfo = await GoogleSignin.signIn();
+      console.log(userInfo);
+    } catch (error: any) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        console.log(error);
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        console.log(error);
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        console.log(error);
+      } else {
+        console.log(error);
+      }
+    }
   };
+
+  useEffect(() => {
+    GoogleSignin.configure({});
+  }, []);
   return (
     <View style={styles.homeContainer}>
       <Image source={WelcomeScreen} style={styles.vectorImage} />
@@ -45,12 +68,12 @@ const LoginScreen = ({navigation}) => {
             title={buttonTitle.googleLogin}
             style={styles.welcomeScreenButton}
             leading={<Image source={googleLogo} style={styles.loginLogo} />}
+            onPress={handleLogin}
           />
           <Button
             title={buttonTitle.facebookLogin}
             style={styles.welcomeScreenButton}
             leading={<Image source={facebookLogo} style={styles.loginLogo} />}
-            onPress={handleLogin}
           />
         </Box>
       </Box>
