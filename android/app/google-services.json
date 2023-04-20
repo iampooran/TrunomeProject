@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "320078452161",
+    "project_id": "nativeauth-75148",
+    "storage_bucket": "nativeauth-75148.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320078452161:android:fefe3671240e6c9f130b40",
+        "android_client_info": {
+          "package_name": "com.trunomeproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "320078452161-qvr2ud0pejirdq8g5uci1n91o1jurji0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.trunomeproject",
+            "certificate_hash": "71114a5e34a36e4d8f48ddcc8409c41fa84a00e8"
+          }
+        },
+        {
+          "client_id": "320078452161-42f6i040uefnet7audavn9o3glsvollh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGUVIwD9Mjv9ICXKzLrga3rTyGPv9DGqc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "320078452161-42f6i040uefnet7audavn9o3glsvollh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
