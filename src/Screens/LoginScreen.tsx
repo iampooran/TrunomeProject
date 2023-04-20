@@ -9,7 +9,10 @@ import {buttonTitle} from '../utils/constents/buttonTitle';
 import {placeholder} from '../utils/constents/placeholder';
 import {colors} from '../utils/constents/colors';
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
+  const handleLogin = () => {
+    navigation.navigate('Authenticated');
+  };
   return (
     <View style={styles.homeContainer}>
       <Image source={WelcomeScreen} style={styles.vectorImage} />
@@ -47,6 +50,7 @@ const LoginScreen = () => {
             title={buttonTitle.facebookLogin}
             style={styles.welcomeScreenButton}
             leading={<Image source={facebookLogo} style={styles.loginLogo} />}
+            onPress={handleLogin}
           />
         </Box>
       </Box>
