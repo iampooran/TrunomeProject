@@ -41,6 +41,8 @@ const LoginScreen = ({navigation}) => {
 
   const [confirm, setConfirm] = useState(null);
   const [code, setCode] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState<any>();
 
   function onAuthStateChanged(user: any) {
     if (user) {
@@ -59,26 +61,24 @@ const LoginScreen = ({navigation}) => {
 
   // Handle the button press
   async function signInWithPhoneNumber(phoneNumber: any) {
-    const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+    const confirmation = await auth().signInWithPhoneNumber(
+      `+91${phoneNumber}`,
+    );
+    // console.log(confirmation);
     setConfirm(confirmation);
   }
 
   async function confirmCode() {
     try {
-      await confirm.confirm(code);
+      const result = await confirm.confirm(code);
+      if (result) {
+        navigation.navigate(routes.authenticated);
+      }
     } catch (error) {
-      console.log('Invalid code.');
+      setErrorMessage('Invalid code.');
     }
   }
 
-  if (!confirm) {
-    return (
-      <Button
-        title="Phone Number Sign In"
-        onPress={() => signInWithPhoneNumber('+91 7340557701')}
-      />
-    );
-  }
   return (
     <View style={styles.homeContainer}>
       <Image source={WelcomeScreen} style={styles.vectorImage} />
@@ -86,43 +86,77 @@ const LoginScreen = ({navigation}) => {
         <Text style={styles.welcomeText}>Welcome!</Text>
         <Text style={styles.loginText}>Login with your Phone Number</Text>
       </Box>
-      <Box style={styles.phoneNumberBox}>
-        <Box style={styles.phoneNumberBox2}>
-          <Text style={styles.phoneNumber}>Phone Number</Text>
-          <TextInput
-            value={code}
-            onChangeText={text => setCode(text)}
-            placeholderTextColor={colors.placeholderColorPhoneNumber}
-            placeholder={placeholder.phoneNumberInput}
-            style={styles.phoneNumberInput}
-          />
-        </Box>
-      </Box>
-      <Box style={styles.buttonBox}>
-        <Box style={styles.buttonBox2}>
-          <Button
-            onPress={() => confirmCode()}
-            title={buttonTitle.sendOTP}
-            style={styles.welcomeScreenButton}
-          />
-          <Box style={styles.singInTextBox}>
-            <View style={styles.HRLine} />
-            <Text style={styles.signInText}>Or Sign in with</Text>
-            <View style={styles.HRLine} />
+      {confirm === null && (
+        <>
+          <Box style={styles.phoneNumberBox}>
+            <Box style={styles.phoneNumberBox2}>
+              <Text style={styles.phoneNumber}>Phone Number</Text>
+              <TextInput
+                value={phoneNumber}
+                onChangeText={text => setPhoneNumber(text)}
+                placeholderTextColor={colors.placeholderColorPhoneNumber}
+                placeholder={placeholder.phoneNumberInput}
+                style={styles.phoneNumberInput}
+              />
+            </Box>
           </Box>
-          <Button
-            title={buttonTitle.googleLogin}
-            style={styles.welcomeScreenButton}
-            leading={<Image source={googleLogo} style={styles.loginLogo} />}
-            onPress={handleLogin}
-          />
-          <Button
-            title={buttonTitle.facebookLogin}
-            style={styles.welcomeScreenButton}
-            leading={<Image source={facebookLogo} style={styles.loginLogo} />}
-          />
-        </Box>
-      </Box>
+          <Box style={styles.buttonBox}>
+            <Box style={styles.buttonBox2}>
+              <Button
+                onPress={() => signInWithPhoneNumber(phoneNumber)}
+                title={buttonTitle.sendOTP}
+                style={styles.welcomeScreenButton}
+              />
+              <Box style={styles.singInTextBox}>
+                <View style={styles.HRLine} />
+                <Text style={styles.signInText}>Or Sign in with</Text>
+                <View style={styles.HRLine} />
+              </Box>
+              <Button
+                title={buttonTitle.googleLogin}
+                style={styles.welcomeScreenButton}
+                leading={<Image source={googleLogo} style={styles.loginLogo} />}
+                onPress={handleLogin}
+              />
+              <Button
+                title={buttonTitle.facebookLogin}
+                style={styles.welcomeScreenButton}
+                leading={
+                  <Image source={facebookLogo} style={styles.loginLogo} />
+                }
+              />
+            </Box>
+          </Box>
+        </>
+      )}
+      {confirm !== null && (
+        <>
+          <Box style={styles.phoneNumberBox}>
+            <Box style={styles.phoneNumberBox2}>
+              {errorMessage.length !== 0 && (
+                <Text style={styles.errorMessage}>{errorMessage}</Text>
+              )}
+              <Text style={styles.phoneNumber}>Please Enter Your OTP</Text>
+              <TextInput
+                value={code}
+                onChangeText={text => setCode(text)}
+                placeholderTextColor={colors.placeholderColorPhoneNumber}
+                placeholder={placeholder.otpPlaceHolder}
+                style={styles.phoneNumberInput}
+              />
+            </Box>
+          </Box>
+          <Box style={styles.buttonBox}>
+            <Box style={styles.buttonBox2}>
+              <Button
+                onPress={() => confirmCode()}
+                title={buttonTitle.otpConfirm}
+                style={styles.welcomeScreenButton}
+              />
+            </Box>
+          </Box>
+        </>
+      )}
     </View>
   );
 };

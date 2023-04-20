@@ -5,4 +5,5 @@ export const colors = {
   welcomeScreenButtonBackground: '#1CA7B1',
   signInText: '#9D9D9D',
   HRLine: '#9D9D9D',
+  Red: 'red',
 };
