@@ -12,6 +12,7 @@ import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+import {routes} from '../utils/constents/routes';
 
 const LoginScreen = ({navigation}) => {
   const handleLogin = async () => {
@@ -20,6 +21,10 @@ const LoginScreen = ({navigation}) => {
       await GoogleSignin.signOut();
       const userInfo = await GoogleSignin.signIn();
       console.log(userInfo);
+      const isSignedIn = await GoogleSignin.isSignedIn();
+      if (isSignedIn) {
+        navigation.navigate(routes.authenticated);
+      }
     } catch (error: any) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         console.log(error);
