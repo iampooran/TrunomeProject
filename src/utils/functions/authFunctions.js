@@ -11,7 +11,6 @@ export const HandleLogin = async () => {
     await GoogleSignin.hasPlayServices();
     await GoogleSignin.signOut();
     const userInfo = await GoogleSignin.signIn();
-    console.log(userInfo);
     const isSignedIn = await GoogleSignin.isSignedIn();
     if (isSignedIn) {
       RootNavigation.navigate(routes.authenticated);
